@@ -10,6 +10,16 @@
   </head>
 
   <body>
-    <%= yield %>
+	<header>
+		<div class="header-logo">
+			<a href="/">TaskPostApp</a>
+		</div>
+		<ul class="header-menus">
+			<li>
+				<a href="/about">TaskPostAppとは</a>
+			</li>
+		</ul>
+	</header>
+	<%= yield %>
   </body>
 </html>
