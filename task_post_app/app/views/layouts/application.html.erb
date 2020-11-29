@@ -11,18 +11,18 @@
 
   <body>
 	<header>
-		<div class="header-logo">
-			<%= link_to("TaskPostApp", "/")%>
-		</div>
-		<ul class="header-menus">
-			<li>
-				<%= link_to("TaskPostAppとは", "/about")%>
-			</li>
-			<li>
-				<%= link_to("投稿一覧", "/posts/index")%>
-			</li>
-		</ul>
+	  <div class="header-logo">
+		<%= link_to("TaskPostApp", "/")%>
+	  </div>
+	  <ul class="header-menus">
+		<li>
+			<%= link_to("TaslPostAppとは", "/about")%>
+		</li>
+		<li>
+			<%= link_to("投稿一覧", "/posts/index")%>
+		</li>
+	  </ul>
 	</header>
-	<%= yield %>
+    <%= yield %>
   </body>
 </html>

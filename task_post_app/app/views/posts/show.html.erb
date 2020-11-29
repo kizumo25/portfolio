@@ -1,0 +1,12 @@
+<div class="main posts-show">
+	<div class="container">
+		<div class="posts-show-item">
+			<p>
+				<%= link_to(@post.content, "/posts/#{@post.id}")%>
+			</p>
+			<div class="post-time">
+				<%= @post.created_at%>
+			</div>
+		</div>
+	</div>
+</div>
