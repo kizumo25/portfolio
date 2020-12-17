@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>TaskPostApp</title>
-		<%= csrf_meta_tags %>
-		<%= csp_meta_tag %>
 
-		<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-	</head>
+<head>
+	<title>TaskPostApp</title>
+	<%= csrf_meta_tags %>
+	<%= csp_meta_tag %>
 
-	<body>
-		<header>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+	<header>
 		<div class="header-logo">
-			<%= link_to("TaskPostApp", "/")%>
+			<% if @current_user %>
+				<%= link_to("TaskPostApp", "/posts/index") %>
+			<% else %>
+				<%= link_to("TaskPostApp", "/") %>
+			<% end %>
 		</div>
 		<ul class="header-menus">
-			<% if session[:user_id] %>
-				<li>
-					現在ログインしているユーザーのid:
-					<%= session[:user_id] %>
-				</li>
-			<% end %>
+			<% if @current_user %>
 			<li>
-				<%= link_to("TaslPostAppとは", "/about")%>
+				<%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
 			</li>
 			<li>
 				<%= link_to("投稿一覧", "/posts/index")%>
@@ -34,18 +34,27 @@
 				<%= link_to("ユーザー一覧", "/users/index") %>
 			</li>
 			<li>
+				<%= link_to("ログアウト", "/logout", {method: :post}) %>
+			</li>
+			<% else %>
+			<li>
+				<%= link_to("TaslPostAppとは", "/about")%>
+			</li>
+			<li>
 				<%= link_to("新規登録", "/signup") %>
 			</li>
 			<li>
 				<%= link_to("ログイン", "/login") %>
 			</li>
+			<% end %>
 		</ul>
-		</header>
-		<% if flash[:notice]%>
-		<div class="flash">
-			<%= flash[:notice]%>
-		</div>
-		<% end %>
-		<%= yield %>
-	</body>
+	</header>
+	<% if flash[:notice]%>
+	<div class="flash">
+		<%= flash[:notice]%>
+	</div>
+	<% end %>
+	<%= yield %>
+</body>
+
 </html>
