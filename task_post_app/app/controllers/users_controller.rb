@@ -15,9 +15,11 @@ class UsersController < ApplicationController
 		@user = User.new(
 			name: params[:name],
 			email: params[:email],
-			image_name: "engineer.jpg"
+			image_name: "engineer.jpg",
+			password: params[:password]
 			)
 		if @user.save
+			session[:user_id] = @user.id
 			flash[:notice] = "ユーザー登録が完了しました"
 			redirect_to("/users/#{@user.id}")
 		else
@@ -45,6 +47,23 @@ class UsersController < ApplicationController
 			redirect_to("/users/#{@user.id}")
 		else
 			render("users/edit")
+		end
+	end
+
+	def login_form
+	end
+
+	def login
+		@user = User.find_by(email: params[:email], password: params[:password])
+		if @user
+			session[:user_id] = @user.id
+			flash[:notice] = "ログインしました"
+			redirect_to("/posts/index")
+		else
+			@error_message = "メールアドレスまたはパスワードが間違っています"
+			@email = params[:email]
+			@password = params[:password]
+			render("users/login_form")
 		end
 	end
 end
