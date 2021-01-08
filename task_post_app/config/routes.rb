@@ -13,6 +13,12 @@ Rails.application.routes.draw do
 	get 'users/index' => 'users#index'
 	get 'users/:id' => 'users#show'
 	get 'users/:id/likes' => 'users#likes'
+	resources :users do
+		member do
+			get :following, :followers
+		end
+	end
+	resources :follow_relationships, only: [:create, :destroy]
 
 	get 'posts/index' => 'posts#index'
 	get 'posts/new' => 'posts#new'

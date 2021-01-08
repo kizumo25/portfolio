@@ -88,4 +88,16 @@ class UsersController < ApplicationController
 		redirect_to("/posts/index")
 	end
 	end
+
+	def followings
+		@user = User.find(params[:id])
+		@users = @user.followings.page(params[:page]).per(5)
+		render "show_followings"
+	end
+
+	def followers
+	@user = User.find(params[:id])
+	@users = @user.followers.page(params[:page]).per(5)
+	render "show_followers"
+	end
 end
